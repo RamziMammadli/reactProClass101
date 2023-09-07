@@ -15,7 +15,7 @@ const Product = () => {
   }, []);
 
   const addBasket = (id) => {
-    axios.post('https://dummyjson.com/carts/1', {
+    axios.post('https://dummyjson.com/carts/add', {
         id: 1,
         quantity: 1
     })
@@ -27,13 +27,11 @@ const Product = () => {
       <Search />
       <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
         {data &&
-          data.map((sitare) => {
-            return <div style={{border: '1px solid gray'}}> <ProductBox product={sitare} /> <AddBasketButton/> </div>;
+          data.map((item) => {
+            return <div style={{border: '1px solid gray', marginTop: '20px', borderRadius:20, marginLeft:'20px'}}> <ProductBox product={item} /> <AddBasketButton sebeteAt={() => addBasket(item.id)}/> </div>;
           })}
-          
       </div>
     </div>
   );
 };
-
 export default Product;
