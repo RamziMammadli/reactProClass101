@@ -2,24 +2,18 @@ import React, { useEffect, useState } from "react";
 import Top from "../../components/Top/Top";
 import Search from "../../components/Search/Search";
 import ProductBox from "../../components/ProductBox/ProductBox";
-import axios from "axios";
 import AddBasketButton from "../../components/Buttons/AddBasketButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsThunk } from "../../api/reducer/getSlice";
 
 const Product = () => {
-  const [data, setData] = useState([]);
+  const data = useSelector((state) => state.get.products);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("https://dummyjson.com/products").then((res) => {
-      setData(res.data.products);
-    });
+    dispatch(getProductsThunk());
   }, []);
-
-  const addBasket = (id) => {
-    axios.post("https://dummyjson.com/carts/add", {
-      id: 1,
-      quantity: 1,
-    });
-  };
 
   return (
     <div>
@@ -32,6 +26,7 @@ const Product = () => {
           data.map((item) => {
             return (
               <div
+                key={item.id} // Add a unique key prop for each item
                 style={{
                   border: "1px solid gray",
                   marginTop: "20px",
@@ -39,10 +34,9 @@ const Product = () => {
                   marginLeft: "20px",
                 }}
               >
-                {" "}
-                <ProductBox product={item} />{" "}
-                <AddBasketButton sebeteAt={() => addBasket(item.id)} text='add basket' />{" "}
-                <AddBasketButton sebeteAt={() => addBasket(item.id)} text='buy' />
+                <ProductBox product={item} />
+                <AddBasketButton text="add basket" />
+                <AddBasketButton text="buy" />
               </div>
             );
           })}
@@ -50,4 +44,5 @@ const Product = () => {
     </div>
   );
 };
+
 export default Product;
