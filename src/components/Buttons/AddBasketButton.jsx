@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddBasketButton = ({sebeteAt}) => {
+const AddBasketButton = ({sebeteAt,text}) => {
   const buttonStyle = {
     padding: '10px 20px',
     backgroundColor: 'yellow',
@@ -11,7 +11,7 @@ const AddBasketButton = ({sebeteAt}) => {
   };
 
   return (
-      <button onClick={sebeteAt} style={buttonStyle}>Add to basket</button>
+      <button onClick={sebeteAt} style={buttonStyle}>{text}</button>
   );
 };
 
