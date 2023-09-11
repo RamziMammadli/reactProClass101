@@ -4,16 +4,21 @@ import Search from "../../components/Search/Search";
 import ProductBox from "../../components/ProductBox/ProductBox";
 import AddBasketButton from "../../components/Buttons/AddBasketButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsThunk } from "../../api/reducer/getSlice";
+import axios from "axios";
 
 const Product = () => {
   const data = useSelector((state) => state.get.products);
+  const [buttonText , setButtonText ] = useState('sebete at')
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProductsThunk());
-  }, []);
+  const addBasketItem = (item) => {
+    axios.post('link',item)
+  };
+
+  const deleteBasketItem = (item) => {
+    axios.delete(`link/${item.id}`)
+  }
 
   return (
     <div>
@@ -26,7 +31,7 @@ const Product = () => {
           data.map((item) => {
             return (
               <div
-                key={item.id} // Add a unique key prop for each item
+                key={item.id}
                 style={{
                   border: "1px solid gray",
                   marginTop: "20px",
@@ -35,8 +40,9 @@ const Product = () => {
                 }}
               >
                 <ProductBox product={item} />
-                <AddBasketButton text="add basket" />
-                <AddBasketButton text="buy" />
+                <AddBasketButton
+                  text={buttonText} // Eğer ürün sepete ekliyse "delete" olacak, değilse "add basket" olacak
+                />
               </div>
             );
           })}

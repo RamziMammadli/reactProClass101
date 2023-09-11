@@ -2,8 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Top from '../../components/Top/Top'
 import AddBasketButton from '../../components/Buttons/AddBasketButton'
 import ProductBox from '../../components/ProductBox/ProductBox'
+import axios from 'axios'
 
 const Basket = () => {
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/basket')
+    .then(res => {
+      setData(res.data)
+    })
+  })
 
   return (
     <div>

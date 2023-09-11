@@ -10,7 +10,7 @@ const Search = () => {
             <input type="text" name="" id="" placeholder='Burada axtar' style={{width:800,padding:10,borderRadius:15}}/>
         </div>
         <div className="icons">
-            <a href="">-+-</a>
+            <a href="http://localhost:3001/basket">Sebet</a>
             <a href="">\*/</a>
             <a href="">/|\</a>
         </div>
