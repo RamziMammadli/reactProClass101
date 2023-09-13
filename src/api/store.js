@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginSlice from "./reducer/getSlice";
 import getSlice from "./reducer/getSlice";
+import orderSlice from './reducer/getOrders'
 
 export const store = configureStore({
     reducer: {
-        get: getSlice
+        get: getSlice,
+        order: orderSlice
     }
     }
 )
